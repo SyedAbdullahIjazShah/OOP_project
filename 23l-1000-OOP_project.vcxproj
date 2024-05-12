@@ -127,7 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="23l-1000-OOP_project.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Comment.txt" />
+    <Text Include="Post.txt" />
+    <Text Include="User.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Comment.h" />
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="Page.h" />
+    <ClInclude Include="Post.h" />
+    <ClInclude Include="SocialMediaApp.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

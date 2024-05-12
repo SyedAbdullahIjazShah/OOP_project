@@ -4,15 +4,32 @@ int main()
 	const int acc{ 10 };
 		int *nposts=new int {20};
 		int* ncomments = new int{40};
-		Comment* postcomments = new Comment[*ncomments];
+	Comment* postcomments = new Comment[*ncomments];
 	User* friends=new User[acc - 1];
 	User* Userarray = new User[acc];
 	Post* allposts = new Post[*nposts];
 	User* Mainuser = new User;
 
-	fstream allpostsfile;
-	allpostsfile.open("Post.txt", ios::in);
-	if (!allpostsfile)
+	fstream commentsfile;
+	commentsfile.open("Comment.txt", ios::in);
+	if (!commentsfile)
+	{
+		cout << endl << "No such Comment file exsists" << endl;
+		cout << endl << "Invalid File Or Error Opening File" << endl;
+	}
+	else
+	{
+		for (size_t i = 0; i < *ncomments; i++)
+		{
+			postcomments[i].datafromfile(commentsfile);
+			//cout << "\nData copied to Posts Database successfully\n";
+			postcomments[i].printcomments();
+		}
+	}
+
+	fstream postsfile;
+	postsfile.open("Post.txt", ios::in);
+	if (!postsfile)
 	{
 		cout << endl << "No such Post file exsists" << endl;
 		cout << endl << "Invalid File Or Error Opening File" << endl;
@@ -21,7 +38,7 @@ int main()
 	{
 		for (size_t i = 0; i < *nposts; i++)
 		{
-			allposts[i].datafromfile(allpostsfile);
+			allposts[i].datafromfile(postsfile);
 			//cout << "\nData copied to Posts Database successfully\n";
 			allposts[i].printpost();
 		}

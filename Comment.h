@@ -5,59 +5,66 @@ class Comment
 public:
 	string getcommentcontent();
 	string getcommentauthor();
-	
+	string getpostcommmentid();
 	
 	void datafromfile(fstream& file);
 	void setcommentcontent(string);
 	void setcommmentauthor(string);
 
 	Comment();
-	Comment(string comment,string) ;
+	Comment(string comment,string postcommentid,string commentauthor,string commentcontent) ;
 	~Comment();
 
 private:
 	string commentcontent;
+	string postcommentid;
 	string commentid;
-	User commentauthor;
+	string commentauthor;
 
 };
 string Comment::getcommentcontent() 
 {
-
+	return commentcontent;
 }
 string Comment::getcommentauthor() 
 {
-
+	return commentauthor;
 }
 
-
+string Comment::getpostcommmentid() 
+{
+	return postcommentid;
+}
 void Comment::setcommentcontent(string commentcontent)
 {
 	this->commentcontent = commentcontent;
 }
 void Comment::setcommmentauthor(string commentauthor) 
 {
+	this->commentauthor = commentauthor;
 	
 }
 void Comment::datafromfile(fstream& file)
 {
-	file >> postid >> postday >> postmonth >> postyear >> postauthor >> posttype >> postlikes >> postcontent;
-	Post(postid, postday, postmonth, postyear, postauthor, posttype, postlikes, postcontent);
-	setpostdate(postday, postmonth, postyear);
+	file >> commentid >> postcommentid >> commentauthor >> commentcontent;
+	Comment(commentid , postcommentid , commentauthor , commentcontent);
+	
 }
 Comment::Comment()
 {
 	commentcontent = "";
-	commentauthor("", "", "");
+	commentauthor="";
+	postcommentid = "";
+	commentid = "";
 }
-Comment ::Comment(string commentcontent,string author)
+Comment ::Comment(string commentcontent, string postcommentid,string commentuthor,string postcontent)
 {
 	this->commentcontent = commentcontent;
-	commentauthor("", author, "");
+	this->commentauthor=commentauthor;
+	this->postcommentid = postcommentid;
+	this->commentid = commentid;
 
 }
-
-
 Comment::~Comment()
 {
 }

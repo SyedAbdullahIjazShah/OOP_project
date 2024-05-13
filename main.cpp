@@ -13,10 +13,13 @@ int main()
 	User* Userarray = new User[acc];
 	Post* allposts = new Post[*nposts];
 	User* Mainuser = new User;
-	//////////////////////////////////////////////DYNAMIC VARIABLES//////////////////////////////////////////////
-	// 
+	//////////////////////////////////////////////DYNAMIC VARIABLES& & LABELS//////////////////////////////////////////////
+	
+
 	//Functionalitymenu-->>is a label to get to the functionality menu
 	// Exitapplication-->> is a label used to exit the application
+	// Firstfunctionalitylabel-->> is a label to get back to the menu inside the 1 selecttion functionaltiy
+	// 
 	/////////////////////////////////////COMMENT FILE READING///////////////////////////////////////////////////////
 	fstream commentsfile;
 	commentsfile.open("Comment.txt", ios::in);
@@ -273,8 +276,21 @@ int main()
 						}
 
 					}
+					goto Firstfunctionalitylabel;
 				}
-				goto Firstfunctionalitylabel;
+				else if(chose2 == "1")
+				{
+
+
+
+					goto Firstfunctionalitylabel;
+				}
+				else
+				{
+
+
+					goto Functionalitymenu;
+				}
 
 			}
 

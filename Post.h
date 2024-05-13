@@ -99,8 +99,8 @@ string Post::getpostyear()
 //FILE INPUT 
 void Post::datafromfile(fstream& file) 
 {
-	file >> postid >>  postday>>postmonth>> postyear >> postauthor >> posttype>>postlikes>>postcontent;
-	Post(postid, postday, postmonth,  postyear, postauthor, posttype, postlikes,  postcontent);
+	file >>postid>>postday>>postmonth>>postyear>>postauthor>>posttype>>postlikes>>postcontent;
+	Post(postid,postday,postmonth,postyear,postauthor,posttype,postlikes,postcontent);
 	setpostdate(postday, postmonth, postyear);
 }
 
@@ -132,9 +132,9 @@ Post::Post(string postid, string postday, string postmonth, string postyear, str
 	this->posttype = posttype;
 	this->postlikes=postlikes;
 	this->postauthor = postauthor;
-	this->postday = postday;
-	this->postmonth = postmonth;
-	this->postyear = postyear;
+	//this->postday = postday;
+	//this->postmonth = postmonth;
+	//this->postyear = postyear;
 	setpostdate(postday, postmonth, postyear);
 	
 	
@@ -146,9 +146,9 @@ Post::Post()
 	posttype = "";
 	postlikes = "";
 	postauthor = "";
-	postdate.setday("");
-	postdate.setmonth("");
-	postdate.setyear("");
+	postday="";
+	postmonth="";
+	postyear="";
 	setpostdate(postday, postmonth, postyear);
 }
 Post::~Post()

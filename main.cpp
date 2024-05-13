@@ -1,15 +1,23 @@
 #include"SocialMediaApp.h"
 int main()
 {
+	//////////////////////////////////////////////DYNAMIC VARIABLES//////////////////////////////////////////////
 	const int acc{ 10 };
-		int *nposts=new int {20};
-		int* ncomments = new int{40};
+	int *nposts=new int {20};
+	int* ncomments = new int{40};
+	string currentday{"13"};
+	string currentmonth{"05"};
+	string currentyear{ "2024" };
 	Comment* postcomments = new Comment[*ncomments];
 	User* friends=new User[acc - 1];
 	User* Userarray = new User[acc];
 	Post* allposts = new Post[*nposts];
 	User* Mainuser = new User;
-
+	//////////////////////////////////////////////DYNAMIC VARIABLES//////////////////////////////////////////////
+	// 
+	//Functionalitymenu-->>is a label to get to the functionality menu
+	// Exitapplication-->> is a label used to exit the application
+	/////////////////////////////////////COMMENT FILE READING///////////////////////////////////////////////////////
 	fstream commentsfile;
 	commentsfile.open("Comment.txt", ios::in);
 	if (!commentsfile)
@@ -26,7 +34,7 @@ int main()
 			postcomments[i].printcomments();
 		}
 	}
-
+	/////////////////////////////////////COMMENT POST READING///////////////////////////////////////////////////////
 	fstream postsfile;
 	postsfile.open("Post.txt", ios::in);
 	if (!postsfile)
@@ -43,7 +51,7 @@ int main()
 			allposts[i].printpost();
 		}
 	}
-
+	/////////////////////////////////////USER FILE READING///////////////////////////////////////////////////////
 
 	fstream userfile;
 	userfile.open("User.txt", ios::in);
@@ -61,6 +69,9 @@ int main()
 		}
 	}
 	string select;
+	///////////////////////////////////// FILE READING ENDED///////////////////////////////////////////////////////
+	
+	/////////////////////////////////////FILE READING ENDED ///////////////////////////////////////////////////////
 	//cout << "\n<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>\n";
 	
 	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
@@ -75,6 +86,7 @@ int main()
 	{
 		if (select == "0")
 		{
+			Exitapplication:
 			system("CLS");
 			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 			cout << "***************************************************************** Application Closed ***********************************************************************************\n";
@@ -146,18 +158,25 @@ int main()
 
 	}
 	cin.ignore();
+
 	system("CLS");
 	cout << "\t\t\t\t\t\tYou logged in as :" << Mainuser->getname() << endl;
 
-loop:
+	Functionalitymenu:
 	select = "";
 	cout <<endl<< "Press the any key to see functionalities menu" << endl << endl << endl;
 	cin.ignore();
 	cin >> select;
-	
+	system("_mm_pause");
 	system("CLS");
-	cout << "\t\t\t\t\t\tYou logged in as :" << Mainuser->getname() << endl << endl << endl;
+	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
+	cout << "***************************************************************** You logged in as :" << Mainuser->getname()<< "* **********************************************************************************\n";
+	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
+	cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
+	/*cout << "\t\t\t\t\t\tYou logged in as :" << Mainuser->getname() << endl << endl << endl;*/
+	/////////////////////////////////////LOGING IN DONE///////////////////////////////////////////////////////
 	select = "";
+	///////////////////////////////////    MENU BAR    ///////////////////////////////////////////////////////
 	cout << "Press the required key for specific functionalities"<<endl << endl << endl;
 	cout << "0 :\tLogin into another account\t\n";
 	cout << "1 :\tView HomePage \t\n";
@@ -170,7 +189,7 @@ loop:
 	cout << "8 :\tView friend list\t\n";
 	cout << "9 :\tView page\t\n";
 	cout << "E :\tExit Application\t\n\n\n";
-	
+	/////////////////////////////////////MENU INVALID SELECTION///////////////////////////////////////////////////////
 	cout << "\t\t\tEnter Desired Option\t: ";
 	cin >> select;
 	while (select != "0" && select != "1"
@@ -183,6 +202,7 @@ loop:
 		cout << "\nPlease Select from an Option:\t";
 		cin >> select;
 	}
+	/////////////////////////////////////MENU VALID SELECTIONS///////////////////////////////////////////////////////
 	while (select != "E" && select != "e") {
 
 		if (select == "0")
@@ -198,11 +218,70 @@ loop:
 			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 			cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
 
+			string chose2{ " " };
+			Firstfunctionalitylabel:
+			/////////////////////////////     MENU:FRIENDS POST & PAGES POST     ///////////////////////////////////////////
+			cout << "\n\t-->>PRESS 0  TO SEE THE ALL FRIENDS POSTS\n";
+			cout << "\n\t-->>PRESS 1  TO SEE THE ALL lIKED PAGES POSTS\n";
+			cout << "\n\t-->>PRESS 2  TO GO BACK TO FUNCTIONALITY MENU\n";
+			cout << "\n\t-->>PRESS 'e' OR 'E'  TO EXIT THE APPLICATION\n";
+			cout << "\n\t";
+			cin >> chose2;
+			while (chose2 != "0" && chose2 != "1" && chose2 != "2" && chose2 != "e" && chose2 != "E")
+			{
+				cout << "\nPlease Select from an Option:\t";
+				cin >> chose2;
+			}
+
+			if (chose2 == "e" || chose2 == "E")
+			{
+				goto Exitapplication;
+			}
+			else
+			{
+				
+				if (chose2 == "0")
+				{
+					cout << "\n\t\t\t\t\tHERE ARE THE LAST POSTS SHARED BY THE YOUR FRIENDS IN LAST 24 HOURS\n";
+					for (size_t i = 0; i < acc - 1; i++)
+					{
+					
+						if (friends[i].getname() != Mainuser->getname())
+						{
+					
+							for (size_t j = 0; j < *nposts; j++)
+							{
+								
+								if (friends[i].getname() == allposts[j].getpostauthor())
+								{
+					
+									if (stoi(allposts[j].getpostday()) == stoi(currentday) || stoi(allposts[j].getpostday()) == (stoi(currentday)-1) )
+									{
+										
+										if (stoi(allposts[j].getpostmonth()) == stoi(currentmonth))
+										{
+										
+											if (stoi(allposts[j].getpostyear()) == stoi(currentyear))
+											{
+												
+												allposts[j].printpost();
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+				goto Firstfunctionalitylabel;
+
+			}
+
 
 		}
 		else if (select == "2")
 		{
-
 		}
 		else if (select == "3")
 		{
@@ -226,6 +305,7 @@ loop:
 		}
 		else if (select == "8")
 		{
+			/////////////////////////////////////MENU:FRIEND LIST///////////////////////////////////////////////////////
 			cout << "\n\tFriends Are As Follows\n";
 			for (size_t i = 0; i < acc - 1; i++)
 			{
@@ -236,18 +316,20 @@ loop:
 		{
 
 		}
-		goto loop;
+		goto Functionalitymenu;
 	}
+	/////////////////////////////////////APPLICATION CLOSING///////////////////////////////////////////////////////
 		if(select == "E" && select == "e") 
 		{
-			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
+			goto Exitapplication;
+			/*cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 			cout << "***************************************************************** Application Closed ***********************************************************************************\n";
 			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 			cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
 
 			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 			
-				return 0;
+				return 0;*/
 		}
 	
 } 

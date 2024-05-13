@@ -74,10 +74,11 @@ void Comment::datafromfile(fstream& file)
 }
 void Comment::printcomments()
 {
-	cout << commentid << "\t" << postcommentid << "\t" << commentauthor << "\t" ;
+	cout << " COMMENT ID:\t " << commentid << "\t" << " POST ID:\t" << postcommentid << "\t" <<" COMMENT AUTHOR:\t" << commentauthor << "\t"<<"COMMENT CONTENT: \t";
 	for (size_t i = 0;  commentcontent[i]!='\0'; i++)
 	{
-		if(commentcontent[i] == ' '){
+		if(commentcontent[i] == '.')
+		{
 			cout << " ";
 		}
 		
@@ -87,7 +88,8 @@ void Comment::printcomments()
 		}
 		
 	}
-	cout << endl;
+	
+	cout<<"\n________________________________________________________________________________________________________________________________________________________________________\n";
 }
 Comment::Comment()
 {

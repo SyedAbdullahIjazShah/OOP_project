@@ -111,7 +111,8 @@ int main()
 	cout << "\n\n\n\n";
 	if (select == "1")
 	{
-	label:
+		//GOTO LABEL FOR LOGIN;
+		Login:
 		cout << "\t\t\t\t\t\t\t\t";
 		cin.ignore();
 		system("CLS");
@@ -142,7 +143,7 @@ int main()
 		cout << "\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tInvalid Username And Password\n\n\t\t\t\t\t\t\t\tPress Any Key To Continue\n\t\n\t";
 		
 //		cin.ignore();
-		goto label;
+		goto Login;
 	}
 	if (flag == "1")
 	{
@@ -163,7 +164,10 @@ int main()
 	cin.ignore();
 
 	system("CLS");
-	cout << "\t\t\t\t\t\tYou logged in as :" << Mainuser->getname() << endl;
+	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
+	cout << "***************************************************************** You logged in as :" << (Mainuser->getname()) << " ***********************************************************************************\n";
+	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
+	cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
 
 	Functionalitymenu:
 	select = "";
@@ -173,7 +177,7 @@ int main()
 	system("_mm_pause");
 	system("CLS");
 	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
-	cout << "***************************************************************** You logged in as :" << Mainuser->getname()<< "* **********************************************************************************\n";
+	cout << "***************************************************************** You logged in as :" << Mainuser->getname()<< " ***********************************************************************************\n";
 	cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 	cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
 	/*cout << "\t\t\t\t\t\tYou logged in as :" << Mainuser->getname() << endl << endl << endl;*/
@@ -206,15 +210,19 @@ int main()
 		cin >> select;
 	}
 	/////////////////////////////////////MENU VALID SELECTIONS///////////////////////////////////////////////////////
-	while (select != "E" && select != "e") {
+		while (select != "E" && select != "e") 
+		{
 
 		if (select == "0")
 		{
-			goto label;
+			////////////////////////////////////////////AGAIN LOGIN///////////////////////////////////////////////////
+			goto Login;
 
-		}
+		}	
+		/*DONE*/
 		else if (select == "1")
 		{
+			////////////////////////////////////////////VIEWING A HOMEPAGE///////////////////////////////////////////////////
 			system("CLS");
 			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
 			cout << "***************************************************************** WELCOME TO THE HOME PAGE *****************************************************************************\n";
@@ -298,42 +306,162 @@ int main()
 		}
 		else if (select == "2")
 		{
+
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			goto Functionalitymenu;
 		}
 		else if (select == "3")
 		{
 
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			goto Functionalitymenu;
 		}
 		else if (select == "4")
 		{
 
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			goto Functionalitymenu;
 		}
 		else if (select == "5")
 		{
 
+			string temppostid{ "" };
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			cin >> temppostid;
+			while (temppostid != "0" && temppostid != "1" && temppostid != "2" && temppostid != "e" && temppostid != "E")
+			{
+				cout << "\nPlease Select from an Option:\t";
+				cin >> temppostid;
+			}
+			if (temppostid == "e" && temppostid == "E")
+			{
+				goto Exitapplication;
+			}
+			else {
+				if (temppostid == "0") {
+					cout << "\n\tENTER A VALID POST ID RNAGING FROM 000 TO 020 ONLY:\t";
+					cin >> temppostid;
+					while (stoi(temppostid) <= 000 || stoi(temppostid) >= 020)
+					{
+						cout << "\n\tPLEASE ENTER A VALID POST ID RNAGING FROM 000 TO 020 :\t";
+						cin >> temppostid;
+					}
+					for (size_t i = 0; i < *nposts; i++)
+					{
+						if (allposts[i].getpostid() == temppostid)
+						{
+							allposts[i].printpost();
+							for (size_t j = 0; j < *ncomments; j++)
+							{
+								if (postcomments[j].getpostcommmentid() == allposts[i].getpostid())
+								{
+									cout << "\n\t";
+									postcomments[j].printcomments();
+
+								}
+							}
+
+						}
+					}
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
+			}
 		}
 		else if (select == "6")
 		{
+			////////////////////////////////////////////SHARING A MEMMORY///////////////////////////////////////////////////
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
 
+			goto Functionalitymenu;
 		}
 		else if (select == "7")
 		{
+			////////////////////////////////////////////VIEW USERS PROFILE///////////////////////////////////////////////////
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
 
+			goto Functionalitymenu;
 		}
 		else if (select == "8")
 		{
 			/////////////////////////////////////MENU:FRIEND LIST///////////////////////////////////////////////////////
-			cout << "\n\tFriends Are As Follows\n";
-			for (size_t i = 0; i < acc - 1; i++)
+
+			cout << "\n\t-->>PRESS 0  TO SEE THE FRIENDS \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			string choice8;
+			cin >> choice8;
+			while (choice8 != "0" && choice8 != "1" && choice8 != "2" && choice8 != "e" && choice8 != "E")
 			{
-				cout << endl <<"Id: " << friends[i].getuid() << "\t\t Name: " << friends[i].getname() << endl;
+				cout << "\nPlease Select from an Option:\t";
+				cin >> choice8;
+			}
+			if (choice8 == "0") 
+			{
+				cout << "\n\tFriends Are As Follows\n";
+				for (size_t i = 0; i < acc - 1; i++)
+				{
+					cout << endl << "Id: " << friends[i].getuid() << "\t\t Name: " << friends[i].getname() << endl;
+				}
+			}
+			else
+			{
+				if (choice8 == "e" || choice8 == "E")
+				{
+					goto Exitapplication;
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
 			}
 		}
 		else if (select == "9")
 		{
+			////////////////////////////////////////////VIEW A PAGE ///////////////////////////////////////////////////
+			string choice9{""};
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC PAGE WITH POSTS \n";
+			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			cin >> choice9;
+			while (choice9 != "0" && choice9 != "1" && choice9 != "2" && choice9 != "e" && choice9 != "E")
+			{
 
+			}
+			if (choice9=="0")
+			{
+
+			}
+			else
+			{
+				if (choice9 == "e" || choice9 == "E")
+				{
+					goto Exitapplication;
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
+			}
+		}
+			goto Functionalitymenu;
 		}
 		goto Functionalitymenu;
-	}
+	
 	/////////////////////////////////////APPLICATION CLOSING///////////////////////////////////////////////////////
 		if(select == "E" && select == "e") 
 		{

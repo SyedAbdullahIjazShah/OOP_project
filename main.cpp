@@ -209,7 +209,7 @@ int main()
 	cout << "0 :\tLogin into another account\t\n";
 	cout << "1 :\tView HomePage \t\n";
 	cout << "2 :\tLike a Post \t\n";
-	cout << "3 :\tView the list of People who liked your post \t\n";
+	cout << "3 :\tView the list of People who liked post \t\n";
 	cout << "4 :\tComment on a Post\t\n";
 	cout << "5 :\tView a Post\t\n";
 	cout << "6 :\tShare a memory\t\n";
@@ -327,18 +327,106 @@ int main()
 		}
 		else if (select == "2")
 		{
-
-			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			string choice2{ " " };
+			cout << "\n\t-->>PRESS 0  TO ADD LIKE TO THE SPECIFIC POST \n";
 			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
-			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n\t";
+			cin >> choice2;
+			while (choice2 != "0" && choice2 != "1" && choice2 != "2" && choice2 != "e" && choice2 != "E")
+			{
+				cout << "\nPlease Select from an Option:\t";
+				cin >> choice2;
+			}
+			if (choice2 == "0")
+			{
+				cout << "\n\t-->>ADD A SPECIFIC POST ID YOU WANT TO LIKE IT\n\t";
+				string temppostid;
+				cin >> temppostid;
+				for (size_t i = 0; i < *nposts; i++)
+				{
+					if (postlikes[i].getpostid() == temppostid)
+					{
+							User *tempuser=postlikes[i].getlikeduserarray();
+							bool flag = true;
+							for (size_t j = 0; j < stoi(postlikes[i].getpostlikes()); j++)
+							{
+								if (tempuser[j].getname() == Mainuser->getname())
+								{
+									flag = false;
+									cout << "\t\nYOU CANNOT LIKE THIS POST AS U ALREADY HAD LIKED IT\n\t";
+								}
+
+							}
+							if (flag)
+							{
+								int temp = stoi(postlikes[i].getpostlikes())+1;
+								string tempstr= to_string(temp);
+								(postlikes[i].setpostlikes(tempstr));
+
+								tempuser[stoi(postlikes[i].getpostlikes()) - 1].setname(Mainuser->getname());
+								cout << "HERE'S THE UPDATED POST LIKES";
+								postlikes[i].printpostlikes();
+							}
+
+
+
+
+
+						/*cout << "\n________________________________________________________________________________________________________________________________________________________________________\n";
+						postlikes[i].printpostlikes();*/
+					}
+				}
+			}
+			else
+			{
+				if (choice2 == "e" || choice2 == "E")
+				{
+					goto Exitapplication;
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
+			}
 			goto Functionalitymenu;
 		}
 		else if (select == "3")
 		{
-
-			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			string choice3{ " "  };
+			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH USERS LIKED IT  \n";
 			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
-			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n\t";
+			cin >> choice3;
+			while (choice3 != "0" && choice3!= "1" && choice3 != "2" && choice3 != "e" && choice3 != "E")
+			{
+				cout << "\nPlease Select from an Option:\t";
+				cin >> choice3;
+			}
+			if (choice3 == "0")
+			{
+				cout << "\n\t-->>ADD A SPECIFIC POST ID \n\t";
+				string temppostid;
+				cin >> temppostid;
+				for (size_t i = 0; i < *nposts; i++)
+				{
+					if (postlikes[i].getpostid() == temppostid)
+					{
+						cout << "\n________________________________________________________________________________________________________________________________________________________________________\n";
+						postlikes[i].printpostlikes(); 
+					}
+				}
+			}
+			else
+			{
+				if (choice3 == "e" || choice3 == "E")
+				{
+					goto Exitapplication;
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
+			}
 			goto Functionalitymenu;
 		}
 		else if (select == "4")
@@ -422,7 +510,7 @@ int main()
 			/////////////////////////////////////MENU:FRIEND LIST///////////////////////////////////////////////////////
 
 			cout << "\n\t-->>PRESS 0  TO SEE THE FRIENDS \n";
-			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
+	 		cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
 			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
 			string choice8;
 			cin >> choice8;
@@ -487,15 +575,8 @@ int main()
 		if(select == "E" && select == "e") 
 		{
 			goto Exitapplication;
-			/*cout << "________________________________________________________________________________________________________________________________________________________________________\n";
-			cout << "***************************************************************** Application Closed ***********************************************************************************\n";
-			cout << "________________________________________________________________________________________________________________________________________________________________________\n";
-			cout << "------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n";
-
-			cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 			
-				return 0;*/
 		}
-	
+		
 } 
 //till now , my larger array of users is dynamic and main user is dynamic , remember to delete the space

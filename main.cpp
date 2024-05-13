@@ -13,14 +13,35 @@ int main()
 	User* Userarray = new User[acc];
 	Post* allposts = new Post[*nposts];
 	User* Mainuser = new User;
+	Postlikes* postlikes = new Postlikes[*nposts];
 	//////////////////////////////////////////////DYNAMIC VARIABLES& & LABELS//////////////////////////////////////////////
 	
+
+	///////////////////////////////////// POSTLIKES FILE READING///////////////////////////////////////////////////////
+
+	fstream postlikesfile;
+	postlikesfile.open("Postlikes.txt", ios::in);
+	if (!postlikesfile)
+	{
+		cout << endl << "No such Postlike file exsists" << endl;
+		cout << endl << "Invalid File Or Error Opening File" << endl;
+	}
+	else
+	{
+		for (size_t i = 0; i < *nposts; i++)
+		{
+			postlikes[i].readdatafromfile(postlikesfile);
+			//cout << "\nData copied to Posts Database successfully\n";
+			postlikes[i].printpostlikes();
+		}
+	}
 
 	//Functionalitymenu-->>is a label to get to the functionality menu
 	// Exitapplication-->> is a label used to exit the application
 	// Firstfunctionalitylabel-->> is a label to get back to the menu inside the 1 selecttion functionaltiy
 	// 
 	/////////////////////////////////////COMMENT FILE READING///////////////////////////////////////////////////////
+
 	fstream commentsfile;
 	commentsfile.open("Comment.txt", ios::in);
 	if (!commentsfile)
@@ -37,7 +58,7 @@ int main()
 			postcomments[i].printcomments();
 		}
 	}
-	/////////////////////////////////////COMMENT POST READING///////////////////////////////////////////////////////
+	///////////////////////////////////// POST FILE READING///////////////////////////////////////////////////////
 	fstream postsfile;
 	postsfile.open("Post.txt", ios::in);
 	if (!postsfile)

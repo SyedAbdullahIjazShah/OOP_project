@@ -32,6 +32,9 @@
     <Text Include="Postlikes.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="Pages.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PostLikes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sharememmory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

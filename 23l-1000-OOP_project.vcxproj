@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Comment.txt" />
+    <Text Include="Pages.txt" />
     <Text Include="Post.txt" />
     <Text Include="Postlikes.txt" />
     <Text Include="User.txt" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Page.h" />
     <ClInclude Include="Post.h" />
     <ClInclude Include="PostLikes.h" />
+    <ClInclude Include="Sharememmory.h" />
     <ClInclude Include="SocialMediaApp.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>

@@ -5,7 +5,7 @@ int main()
 	const int acc{ 10 };
 	int *nposts=new int {20};
 	int* ncomments = new int{40};
-	string currentday{"13"};
+	string currentday{"14"};
 	string currentmonth{"05"};
 	string currentyear{ "2024" };
 	Comment* postcomments = new Comment[*ncomments];
@@ -37,8 +37,7 @@ int main()
 		for (size_t i = 0; i < *nposts; i++)
 		{
 			postlikes[i].readdatafromfile(postlikesfile);
-			//cout << "\nData copied to Posts Database successfully\n";
-			postlikes[i].printpostlikes();
+			
 		}
 	}
 
@@ -61,7 +60,7 @@ int main()
 		{
 			postcomments[i].datafromfile(commentsfile);
 			//cout << "\nData copied to Posts Database successfully\n";
-			postcomments[i].printcomments();
+			
 		}
 	}
 	///////////////////////////////////// POST FILE READING///////////////////////////////////////////////////////
@@ -78,7 +77,7 @@ int main()
 		{
 			allposts[i].datafromfile(postsfile);
 			//cout << "\nData copied to Posts Database successfully\n";
-			allposts[i].printpost();
+			
 		}
 	}
 	/////////////////////////////////////USER FILE READING///////////////////////////////////////////////////////
@@ -302,6 +301,13 @@ int main()
 											{
 												
 												allposts[j].printpost();
+												for (size_t k = 0; k < *ncomments; k++)
+												{
+													if (allposts[j].getpostid() == postcomments[k].getpostcommmentid())
+													{
+														postcomments[k].printcomments();
+													}
+												}
 											}
 										}
 									}
@@ -455,19 +461,29 @@ int main()
 				
 				for (size_t i = 0; i < *nposts; i++)
 				{
-				
+					
 					if (postcomments[i].getpostcommmentid() == temppostid)
 					{
 						newcomments[0].setpostcommentid(temppostid);
 
 						newcomments[0].setcommentauthor(Mainuser->getname());
-
+					
+						string str;
+						cin.ignore();
 						cout << "ENTER COMMENT YOU WANT TO ADD: \t";
-						string tempstr;
-						getline(cin, tempstr);
-						newcomments[0].setcommentcontent(tempstr);
+						
+						getline(cin, str);
+
+						
+						
+							newcomments[0].setcommentcontent(str);
+						
 
 						break;
+					}
+					else
+					{
+						
 					}
 				}
 
@@ -651,6 +667,40 @@ int main()
 			goto Exitapplication;
 			
 		}
+		delete nposts;
+		delete ncomments;
+		delete Mainuser;
+		for (size_t i = 0; i < 40; i++)
+		{
+			delete [i]postcomments ;
+		}
+		for (size_t i = 0; i < 5; i++)
+		{
+			delete[i]newcomments;
+		}
+		for (size_t i = 0; i < acc - 1; i++)
+		{
+			delete [i]friends;
+		}
+		for (size_t i = 0; i < acc; i++)
+		{
+			delete[i]Userarray;
+	
+		}
+		for (size_t i = 0; i < 20; i++)
+		{
+			delete[i]allposts;
+		}
+		for (size_t i = 0; i <20 ; i++)
+		{
+			delete[i] postlikes;
+		}
+	
+		Userarray = nullptr;
+		allposts = nullptr;
+		 Mainuser = nullptr;
+		 postlikes = nullptr;
+	
 		
 } 
 //till now , my larger array of users is dynamic and main user is dynamic , remember to delete the space

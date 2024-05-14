@@ -9,6 +9,12 @@ int main()
 	string currentmonth{"05"};
 	string currentyear{ "2024" };
 	Comment* postcomments = new Comment[*ncomments];
+	Comment* newcomments = new Comment[5];
+	newcomments[0].setcommentid("041");
+	newcomments[1].setcommentid("042");
+	newcomments[2].setcommentid("043");
+	newcomments[3].setcommentid("044");
+	newcomments[4].setcommentid("045");
 	User* friends=new User[acc - 1];
 	User* Userarray = new User[acc];
 	Post* allposts = new Post[*nposts];
@@ -240,7 +246,6 @@ int main()
 			goto Login;
 
 		}	
-		/*DONE*/
 		else if (select == "1")
 		{
 			////////////////////////////////////////////VIEWING A HOMEPAGE///////////////////////////////////////////////////
@@ -447,70 +452,25 @@ int main()
 				cout << "\n\t-->>ADD A SPECIFIC POST ID YOU WANT TO ADD A COMMENT ON IT \n\t";
 				string temppostid;
 				cin >> temppostid;
-				int* tempncomments = new int{ *ncomments + 1 };
-				Comment* temppostcomments = new Comment[*tempncomments];
-				for (size_t i = 0; i < *ncomments; i++)
-				{
-					temppostcomments[i].setcommentauthor(postcomments[i].getcommentauthor());
-					temppostcomments[i].setcommentcontent(postcomments[i].getcommentcontent());
-					temppostcomments[i].setcommentid(postcomments[i].getcommentid());
-					temppostcomments[i].setpostcommentid(postcomments[i].getpostcommmentid());
-				}
 				
 				for (size_t i = 0; i < *nposts; i++)
 				{
 				
-					if (temppostcomments[i].getpostcommmentid() == temppostid)
+					if (postcomments[i].getpostcommmentid() == temppostid)
 					{
-						cout << " stage2";
+						newcomments[0].setpostcommentid(temppostid);
 
-						int tempid = stoi(temppostcomments[(*tempncomments - 1)].getpostcommmentid()) + 1;
-						cout << " stage3";
-						string tempstr = to_string(tempid);
-						cout << " stage4";
-						temppostcomments[i].setcommentid(tempstr);
+						newcomments[0].setcommentauthor(Mainuser->getname());
 
-						temppostcomments[i].setpostcommentid(temppostid);
+						cout << "ENTER COMMENT YOU WANT TO ADD: \t";
+						string tempstr;
+						getline(cin, tempstr);
+						newcomments[0].setcommentcontent(tempstr);
 
-						temppostcomments[i].setcommentauthor(Mainuser->getname());
-
-						cout << "ENTER COMMENT YOU WANT TO ADD";
-						cin >> tempstr;
-						postcomments[i].setcommentcontent(tempstr);
-
-
+						break;
 					}
 				}
 
-			
-					/*string temppostid;
-					cin >> temppostid;
-					*ncomments =*ncomments + 1;
-					for (size_t i = 0; i < *nposts; i++)
-					{
-						cout << " stage1";
-						if (postcomments[i].getpostcommmentid() == temppostid)
-						{
-							cout << " stage2"<< (postcomments[(*ncomments - 1)].getpostcommmentid()) ;
-
-							int tempid=stoi(postcomments[(*ncomments - 1)].getpostcommmentid())+1;
-							cout << " stage3";
-							string tempstr = to_string(tempid);
-							cout << " stage4";
-								postcomments[i].setcommentid(tempstr);
-							
-								postcomments[i].setpostcommentid(temppostid);
-							
-								postcomments[i].setcommentauthor(Mainuser->getname());
-							
-								cout << "ENTER COMMENT YOU WANT TO ADD";
-								cin >> tempstr;
-								postcomments[i].setcommentcontent(tempstr);
-
-
-					}
-				}
-			*/
 			
 			
 			
@@ -574,6 +534,13 @@ int main()
 
 						}
 					}
+						if (newcomments[0].getpostcommmentid() == temppostid)
+						{
+							cout << "\t";
+							newcomments[0].printcomments();
+
+						}
+					
 				}
 				else
 				{
@@ -615,10 +582,23 @@ int main()
 			}
 			if (choice8 == "0") 
 			{
-				cout << "\n\tFriends Are As Follows\n";
-				for (size_t i = 0; i < acc - 1; i++)
+				cout << "\n\t-->>ENTER ID OF THE THE SPECIFIC FRIENDS \n";
+				string tempid;
+				cin >> tempid;
+				while (stoi(tempid)<=000 && stoi(tempid) <= 010)
 				{
-					cout << endl << "Id: " << friends[i].getuid() << "\t\t Name: " << friends[i].getname() << endl;
+					cout << "\n\t-->>ENTER VALID ID : \n";
+					cin >> tempid;
+				}
+
+				cout << "\n\tFriends Are As Follows\n";
+				for (size_t i = 0; i < acc ; i++)
+				{
+					//cout << endl << "Id: " << friends[i].getuid() << "\t\t Name: " << friends[i].getname() << endl;
+					if(Userarray[i].getuid()!=tempid)
+					{
+						cout << endl << "Id: " << Userarray[i].getuid() << "\t\t Name: " << Userarray[i].getname() << endl;
+					}
 				}
 			}
 			else

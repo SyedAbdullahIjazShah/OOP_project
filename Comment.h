@@ -59,7 +59,7 @@ void Comment::setcommentauthor(string commentauthor)
 }
 void Comment::setcommentid(string commentid)
 {
-	this->commentcontent = commentid;
+	this->commentid = commentid;
 }
 void Comment::setpostcommentid(string postcommentid)
 {

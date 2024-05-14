@@ -432,11 +432,105 @@ int main()
 		else if (select == "4")
 		{
 
-			cout << "\n\t-->>PRESS 0  TO SEE SPECIFIC POST WITH COMMENT BY ID \n";
+			string choice2{ " " };
+			cout << "\n\t-->>PRESS 0  TO ADD COMMENT TO THE SPECIFIC POST \n";
 			cout << "\n\t-->>PRESS 1  TO GO TO FUNCTIONALTIY MENU\n";
-			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n";
+			cout << "\n\t-->>PRESS e or E  TO EXIT APPLICATION\n\t";
+			cin >> choice2;
+			while (choice2 != "0" && choice2 != "1" && choice2 != "2" && choice2 != "e" && choice2 != "E")
+			{
+				cout << "\nPlease Select from an Option:\t";
+				cin >> choice2;
+			}
+			if (choice2 == "0")
+			{
+				cout << "\n\t-->>ADD A SPECIFIC POST ID YOU WANT TO ADD A COMMENT ON IT \n\t";
+				string temppostid;
+				cin >> temppostid;
+				int* tempncomments = new int{ *ncomments + 1 };
+				Comment* temppostcomments = new Comment[*tempncomments];
+				for (size_t i = 0; i < *ncomments; i++)
+				{
+					temppostcomments[i].setcommentauthor(postcomments[i].getcommentauthor());
+					temppostcomments[i].setcommentcontent(postcomments[i].getcommentcontent());
+					temppostcomments[i].setcommentid(postcomments[i].getcommentid());
+					temppostcomments[i].setpostcommentid(postcomments[i].getpostcommmentid());
+				}
+				
+				for (size_t i = 0; i < *nposts; i++)
+				{
+				
+					if (temppostcomments[i].getpostcommmentid() == temppostid)
+					{
+						cout << " stage2";
+
+						int tempid = stoi(temppostcomments[(*tempncomments - 1)].getpostcommmentid()) + 1;
+						cout << " stage3";
+						string tempstr = to_string(tempid);
+						cout << " stage4";
+						temppostcomments[i].setcommentid(tempstr);
+
+						temppostcomments[i].setpostcommentid(temppostid);
+
+						temppostcomments[i].setcommentauthor(Mainuser->getname());
+
+						cout << "ENTER COMMENT YOU WANT TO ADD";
+						cin >> tempstr;
+						postcomments[i].setcommentcontent(tempstr);
+
+
+					}
+				}
+
+			
+					/*string temppostid;
+					cin >> temppostid;
+					*ncomments =*ncomments + 1;
+					for (size_t i = 0; i < *nposts; i++)
+					{
+						cout << " stage1";
+						if (postcomments[i].getpostcommmentid() == temppostid)
+						{
+							cout << " stage2"<< (postcomments[(*ncomments - 1)].getpostcommmentid()) ;
+
+							int tempid=stoi(postcomments[(*ncomments - 1)].getpostcommmentid())+1;
+							cout << " stage3";
+							string tempstr = to_string(tempid);
+							cout << " stage4";
+								postcomments[i].setcommentid(tempstr);
+							
+								postcomments[i].setpostcommentid(temppostid);
+							
+								postcomments[i].setcommentauthor(Mainuser->getname());
+							
+								cout << "ENTER COMMENT YOU WANT TO ADD";
+								cin >> tempstr;
+								postcomments[i].setcommentcontent(tempstr);
+
+
+					}
+				}
+			*/
+			
+			
+			
+			
+			
+			
+			}
+			else
+			{
+				if (choice2 == "e" || choice2 == "E")
+				{
+					goto Exitapplication;
+				}
+				else
+				{
+					goto Functionalitymenu;
+				}
+			}
 			goto Functionalitymenu;
-		}
+			}
 		else if (select == "5")
 		{
 

@@ -11,7 +11,7 @@ public:
 	//SETTERS
 	void datafromfile(fstream& file);
 	void setcommentcontent(string);
-	void setcommmentauthor(string);
+	void setcommentauthor(string);
 	void setcommentid(string);
 	void setpostcommentid(string);
 	void printcomments();
@@ -52,7 +52,7 @@ void Comment::setcommentcontent(string commentcontent)
 {
 	this->commentcontent = commentcontent;
 }
-void Comment::setcommmentauthor(string commentauthor) 
+void Comment::setcommentauthor(string commentauthor) 
 {
 	this->commentauthor = commentauthor;
 	
